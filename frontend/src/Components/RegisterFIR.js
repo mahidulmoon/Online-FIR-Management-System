@@ -1,10 +1,50 @@
 import React, { Component } from 'react';
-import { Form,Col,Button,Container } from 'react-bootstrap';
+import { Form,Col,Button,Container,Modal } from 'react-bootstrap';
 class RegisterFIR extends Component {
+    state ={
+        show: true,
+    }
+    handleClose = (event) =>{
+        this.setState({ show: false });
+    }
     render() {
         return (
             <Container>
                 <br/>
+                <Modal show={this.state.show} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Complainer Details</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body><Form>
+                        <Form.Group controlId="formGroupEmail">
+                        <Form.Label>Name</Form.Label>
+                            <Form.Control type="text" placeholder="Enter Name" />
+                        </Form.Group>
+                        <Form.Group controlId="formGroupEmail">
+                        <Form.Label>Father's Name</Form.Label>
+                            <Form.Control type="text" placeholder="Enter Father's Name" />
+                        </Form.Group>
+                        <Form.Group controlId="formGroupEmail">
+                        <Form.Label>Address</Form.Label>
+                            <Form.Control type="text" placeholder="Address" />
+                        </Form.Group>
+                        <Form.Group controlId="formGroupEmail">
+                        <Form.Label>Contact</Form.Label>
+                            <Form.Control type="text" placeholder="Phone" />
+                        </Form.Group>
+                        
+                        
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form></Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={this.handleClose}>
+                        Close
+                    </Button>
+                    
+                    </Modal.Footer>
+                </Modal>
                 <Form>
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridEmail">

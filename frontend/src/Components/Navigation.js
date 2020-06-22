@@ -8,7 +8,7 @@ class Navigation extends Component {
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/registerfir">Register FIR</Nav.Link>
-                    <Nav.Link href="/firlist">Check FIR</Nav.Link>
+                    <Nav.Link href="/firlist">Pending FIR List</Nav.Link>
                     <Nav.Link href="/register">Register</Nav.Link>
                     <Nav.Link href="/login">LogIN</Nav.Link>
                 </Nav>

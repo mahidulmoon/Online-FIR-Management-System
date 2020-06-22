@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table,Container } from 'react-bootstrap';
+import { Table,Container,Button,ButtonGroup } from 'react-bootstrap';
 class Firlist extends Component {
     render() {
         return (
@@ -32,29 +32,12 @@ class Firlist extends Component {
                     <td>@mdo</td>
                     <td>Mark</td>
                     <td>Otto</td>
-                    <td>@mdo</td>
                     <td>Mark</td>
+                    <td><ButtonGroup><Button variant="primary">Approve</Button> ||
+                    <Button variant="danger"> Spam</Button></ButtonGroup></td>
                     
                     </tr>
-                    <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
                     
-                    </tr>
-                    <tr>
-                    <td>3</td>
-                    <td colSpan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                    </tr>
                 </tbody>
             </Table>
             </Container>
