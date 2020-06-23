@@ -6,7 +6,8 @@ import Bodypage from './Bodypage';
 import Login from './Login';
 import Registration from './Registration';
 import Firlist from './Firlist';
-import RegisterFIR from './RegisterFIR'
+import RegisterFIR from './RegisterFIR';
+import UpdateFir from './UpdateFir';
 import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
 export default class Index extends Component {
     render() {
@@ -22,6 +23,7 @@ export default class Index extends Component {
                         <Route path='/register' exact component={Registration} />
                         <Route path='/firlist' exact component={Firlist} />
                         <Route path='/registerfir' exact component={RegisterFIR} />
+                        <Route path='/updatefir' exact component={UpdateFir} />
                     </Switch>
                 </Router>
                </Bodypage>
