@@ -3,7 +3,7 @@ import { Navbar,Nav } from 'react-bootstrap';
 class Navigation extends Component {
     render() {
         return (
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" sticky="top">
                 <Navbar.Brand href="">Online FIR</Navbar.Brand>
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
@@ -11,6 +11,8 @@ class Navigation extends Component {
                     <Nav.Link href="/firlist">Pending FIR List</Nav.Link>
                     <Nav.Link href="/register">Register</Nav.Link>
                     <Nav.Link href="/login">LogIN</Nav.Link>
+                    <Nav.Link href="/waitforcharge">Create ChargeSheet</Nav.Link>
+                    
                 </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">

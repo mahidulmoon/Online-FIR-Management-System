@@ -1,4 +1,7 @@
-
+.admindashboardtable{
+	height: 500px;
+	overflow: scroll;
+}
 footer{
 	position: relative;
 	bottom: 0;

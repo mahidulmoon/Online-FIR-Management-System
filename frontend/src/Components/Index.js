@@ -8,12 +8,16 @@ import Registration from './Registration';
 import Firlist from './Firlist';
 import RegisterFIR from './RegisterFIR';
 import UpdateFir from './UpdateFir';
+import Admindashboard from './Admindashboard';
+import Waitforchargsheet from './Waitforchargesheet';
 import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
 export default class Index extends Component {
     render() {
         return (
             <React.Fragment>
                <Navigation />
+               <br/>
+               <br/>
                <Bodypage>
                 <Router>
                     <Switch>
@@ -24,6 +28,8 @@ export default class Index extends Component {
                         <Route path='/firlist' exact component={Firlist} />
                         <Route path='/registerfir' exact component={RegisterFIR} />
                         <Route path='/updatefir' exact component={UpdateFir} />
+                        <Route path='/admindashboard' exact component={Admindashboard} />
+                        <Route path='/waitforcharge' exact component={Waitforchargsheet} />
                     </Switch>
                 </Router>
                </Bodypage>

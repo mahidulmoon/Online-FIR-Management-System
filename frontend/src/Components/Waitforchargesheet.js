@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Table,Container,Button,ButtonGroup } from 'react-bootstrap';
-class Firlist extends Component {
+class Waitforchargesheet extends Component {
     render() {
         return (
             <Container>
                 <br/>
+                <h2>Create ChargeSheet</h2>
                 <div className="admindashboardtable">
                 <Table striped bordered hover variant="dark">
                 <thead>
@@ -34,9 +35,7 @@ class Firlist extends Component {
                     <td>Mark</td>
                     <td>Otto</td>
                     <td>Mark</td>
-                    <td><ButtonGroup><Button variant="primary">Approve</Button> ||
-                    <Button variant="danger"> Spam</Button></ButtonGroup></td>
-                    
+                    <td><Button variant="success">Mark as Done</Button></td>                   
                     </tr>
                     
                 </tbody>
@@ -47,4 +46,4 @@ class Firlist extends Component {
     }
 }
 
-export default Firlist;
+export default Waitforchargesheet;
