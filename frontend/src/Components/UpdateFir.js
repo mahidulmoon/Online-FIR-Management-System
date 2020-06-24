@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form,Col,Button,Container,Modal } from 'react-bootstrap';
+import { Form,Col,Button,Container } from 'react-bootstrap';
 class UpdateFir extends Component {
     render() {
         return (
