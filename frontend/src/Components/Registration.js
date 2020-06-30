@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Form,Col,Button,Container } from 'react-bootstrap';
+import axios from 'axios';
 class Registration extends Component {
     state = {
         register: {
-            username:'',password:'',email:'',firstname:'',lastname:''
+            username:'',password:'',email:'',first_name: '', last_name: ''
         },
     }
     inputchange = e =>{
@@ -14,10 +15,11 @@ class Registration extends Component {
 
     onsubmit = e =>{
         e.preventDefault();
-        if(this.state.register.username ==='' || this.state.register.password ==='' || this.state.register.email ==='' || this.state.register.firstname ==='' || this.state.register.lastname ==='' ){
+        if(this.state.register.username ==='' || this.state.register.password ==='' || this.state.register.email ==='' || this.state.register.first_name ==='' || this.state.register.last_name ==='' ){
             alert("Please check your Inputs");
         }else{
-            console.log(this.state.register);
+            //console.log(this.state.register);
+            axios.post('http://127.0.0.1:8000/register/registration/',this.state.register).then( response => alert("Registration Success!!!") ).catch(err => alert("Please check your input"))
         }
     }
 
@@ -45,12 +47,12 @@ class Registration extends Component {
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridEmail">
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="text" placeholder="First Name" name="firstname" value={this.state.register.firstname} onChange={this.inputchange} />
+                        <Form.Control type="text" placeholder="First Name" name="first_name" value={this.state.register.first_name} onChange={this.inputchange} />
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridEmail">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="text" placeholder="Last Name" name="lastname" value={this.state.register.lastname} onChange={this.inputchange} />
+                        <Form.Control type="text" placeholder="Last Name" name="last_name" value={this.state.register.last_name} onChange={this.inputchange} />
                         </Form.Group>
                     </Form.Row>
 
