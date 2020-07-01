@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Form,Col,Button,Container,Modal } from 'react-bootstrap';
 class RegisterFIR extends Component {
     state ={
@@ -7,8 +8,12 @@ class RegisterFIR extends Component {
             name:'',fathername:'',address:'',contact:''
         },
         registerfir:{
-            complainername:'',victimename:'',age:'',address:'',dateofincedence:'',timeofincedence:'',complaintype:''
+            complainername:'',victimename:'',age:'',address:'',dateofincedence:'',timeofincedence:'',complaintype:'',thana:''
         },
+        thana:[],
+    }
+    componentDidMount(){
+        axios.get('http://127.0.0.1:8000/thana/contact/').then(res=> this.setState({ thana: res.data }));
     }
     handleClose = (event) =>{
         this.setState({ show: false });
@@ -37,7 +42,7 @@ class RegisterFIR extends Component {
         const cred3 = this.state.registerfir;
         cred3[ "complainername" ] = this.state.modalform.name;
         this.setState({ registerfir: cred3 });
-        if(this.state.registerfir.complainername === '' || this.state.registerfir.victimename === '' || this.state.registerfir.age === '' || this.state.registerfir.address === '' || this.state.registerfir.dateofincedence === '' || this.state.registerfir.timeofincedence === '' || this.state.registerfir.complaintype === '' ){
+        if(this.state.registerfir.complainername === '' || this.state.registerfir.victimename === '' || this.state.registerfir.age === '' || this.state.registerfir.address === '' || this.state.registerfir.dateofincedence === '' || this.state.registerfir.timeofincedence === '' || this.state.registerfir.complaintype === '' || this.state.registerfir.thana === '' ){
             alert("Please check your inputs");
         }else{
             console.log(this.state.registerfir);
@@ -125,7 +130,21 @@ class RegisterFIR extends Component {
                             <option value="Theft">Theft</option>
                             <option value="Domestic Violence">Domestic Violence</option>
                             <option value="other">other</option>
-                        </Form.Control>
+                    </Form.Control>
+                    <Form.Control
+                            as="select"
+                            className="my-1 mr-sm-2"
+                            id="inlineFormCustomSelectPref"
+                            name="thana"
+                            onChange={this.firforminputchange}
+                            custom
+                        >
+                            <option value="0">Choose Thana..</option>
+                            {this.state.thana.map(singlethana=>{
+                                return <option value={singlethana.thananame}>{singlethana.thananame}</option>
+                            })}
+                            
+                    </Form.Control>
 
                     <Button variant="primary" type="submit" onClick={this.firformsubmit} >
                         Submit

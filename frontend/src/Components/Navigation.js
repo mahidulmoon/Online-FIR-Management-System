@@ -17,6 +17,7 @@ class Navigation extends Component {
         e.preventDefault();
         localStorage.removeItem("firtoken");
         localStorage.removeItem("firuserid");
+        localStorage.removeItem("admin");
         //this.setState({ gotologin: true });
         window.location.reload(false);
         //this.props.history.push('/login')
@@ -33,7 +34,8 @@ class Navigation extends Component {
                     <Nav.Link href="/registerfir">Register FIR</Nav.Link>
                     {localStorage.getItem('admin') === 'false' && this.state.islogin && <Nav.Link href="/firlist">Pending FIR List</Nav.Link>}
                     {localStorage.getItem('admin') === 'false' && this.state.islogin && <Nav.Link href="/waitforcharge">Create ChargeSheet</Nav.Link>}
-                    {localStorage.getItem('admin') === 'true' && this.state.islogin && <Nav.Link href="/register">Registration</Nav.Link> }                   
+                    {localStorage.getItem('admin') === 'true' && this.state.islogin && <Nav.Link href="/register">Registration</Nav.Link> }   
+                    <Nav.Link href="/contact">Contact</Nav.Link>                
                 </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
