@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import { Table,Container,Button,ButtonGroup } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 class Firlist extends Component {
+    state = {
+        islogin: '',
+    }
+    componentDidMount(){
+        if(localStorage.getItem('firtoken')){
+            this.setState({ islogin: 'true' });
+        }else{
+            this.setState({ islogin: 'false' });
+        }
+    }
     render() {
+        if( this.state.islogin === 'false' ){
+            return <Redirect to='/login' />
+        }
         return (
             <Container>
                 <br/>

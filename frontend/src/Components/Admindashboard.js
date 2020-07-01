@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import { ProgressBar,Container,Alert,Table } from 'react-bootstrap';
 import Firlist from './Firlist';
+import { Redirect } from 'react-router-dom';
 class Admindashboard extends Component {
+    state = {
+        islogin: '',
+    }
+    componentDidMount(){
+        if(localStorage.getItem('firtoken')){
+            this.setState({ islogin: 'true' });
+            //window.location.reload(false);
+        }else{
+            this.setState({ islogin: 'false' });
+        }
+    }
     render() {
+        if( this.state.islogin === 'false' ){
+            return <Redirect to='/login' />
+        }
         return (
             <Container>
                 <br/>

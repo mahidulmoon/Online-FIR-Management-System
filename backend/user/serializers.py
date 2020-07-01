@@ -13,3 +13,9 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         Token.objects.create(user=user)
         return user
+
+
+class GetUserInfo(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"

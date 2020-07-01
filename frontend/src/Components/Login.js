@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Form,Container,Button } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 class Login extends Component {
     state = {
         login:{
             username:'',password:''
         },
-        token: []
+        token: [],
+        isadmin: 'notadmin',
     }
     inputchange = e =>{
         const cred = this.state.login;
@@ -21,10 +23,27 @@ class Login extends Component {
             //console.log(this.state.login);
             axios.post('http://127.0.0.1:8000/register/authenticate/',this.state.login).then(response => {this.setState({ token: response.data }); 
             localStorage.setItem('firtoken', this.state.token.token);
-            localStorage.setItem('firuserid',this.state.token.id);alert("Login Successfull!!!");window.location.reload(false);}).catch( err => alert("Pleace check your Input"))
+            localStorage.setItem('firuserid',this.state.token.id);alert("Login Successfull!!!");
+            
+            axios.get(`http://127.0.0.1:8000/register/getregisterinfo/${parseInt(this.state.token.id)}/`).then( res => {
+                if( res.data.is_staff){
+                    localStorage.setItem('admin','true');
+                    this.setState({ isadmin: 'admin' });
+                }else{
+                    localStorage.setItem('admin','false');
+                    this.setState({ isadmin: 'normaluser' });
+                }
+            });
+        }).catch( err => alert("Pleace check your Input"))
         }
     }
     render() {
+        if (this.state.isadmin === 'admin'){
+            return <Redirect to='/admindashboard' />
+        }
+        else if(this.state.isadmin === 'normaluser'){
+            return <Redirect to='/firlist' />
+        }
         return (
             <Container>
                 <Form>
