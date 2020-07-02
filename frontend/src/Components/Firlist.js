@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { Table,Container,Button,ButtonGroup } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+import { Table,Container,Button } from 'react-bootstrap';
+import { Redirect,Link } from 'react-router-dom';
+import axios from 'axios';
 class Firlist extends Component {
     state = {
         islogin: '',
+        registeredfir:[],
     }
     componentDidMount(){
         if(localStorage.getItem('firtoken')){
             this.setState({ islogin: 'true' });
+            axios.get('http://127.0.0.1:8000/fir/firregister/').then(res=>this.setState({registeredfir:res.data}));
         }else{
             this.setState({ islogin: 'false' });
         }
@@ -19,6 +22,7 @@ class Firlist extends Component {
         return (
             <Container>
                 <br/>
+                <h2>FIR list</h2>
                 <div className="admindashboardtable">
                 <Table striped bordered hover variant="dark">
                 <thead>
@@ -31,31 +35,35 @@ class Firlist extends Component {
                     <th>Date of Incidence</th>
                     <th>Date of Registration</th>
                     <th>Complaint</th>
-                    <th>Section</th>
                     <th>Status</th>
+                    <th>Thana</th>
                     <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Mark</td>
-                    <td><ButtonGroup><Button variant="primary">Approve</Button> ||
-                    <Button variant="danger"> Spam</Button></ButtonGroup></td>
-                    
-                    </tr>
+                    {this.state.registeredfir.map(singlefir=>{
+                        return(
+                            <tr>
+                            <td>{singlefir.id}</td>
+                            <td><Link to={{ pathname:'/info', infoid:{ check: singlefir.id }}}>{singlefir.complainername}</Link></td>
+                            <td>{singlefir.victimename}</td>
+                            <td>{singlefir.age}</td>
+                            <td>{singlefir.address}</td>
+                            <td>{singlefir.dateofincedence}<br/>{singlefir.timeofincedence}</td>
+                            <td>{singlefir.timeoffirregistration.slice(0,10)}<br/>{singlefir.timeoffirregistration.slice(11,16)}</td>
+                            <td>{singlefir.complaintype}</td>
+                            <td>{singlefir.status}</td>
+                            <td>{singlefir.thana}</td>
+                            <td><Button variant="primary">Approve</Button> <br/>
+                            <Button variant="danger"> Spam....</Button></td>
+                            
+                            </tr>
+                        )
+                    })}
                     
                 </tbody>
             </Table>
-                </div>
+            </div>
             </Container>
         );
     }

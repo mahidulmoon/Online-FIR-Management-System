@@ -11,6 +11,7 @@ import UpdateFir from './UpdateFir';
 import Admindashboard from './Admindashboard';
 import Waitforchargsheet from './Waitforchargesheet';
 import Contactforhelp from './Contactforhelp';
+import Complainerinfo from './Complainerinfo';
 import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
 export default class Index extends Component {
     render() {
@@ -32,6 +33,7 @@ export default class Index extends Component {
                         <Route path='/contact' exact component={Contactforhelp} />
                         <Route path='/admindashboard' exact component={Admindashboard} />
                         <Route path='/waitforcharge' exact component={Waitforchargsheet} />
+                        <Route path='/info' exact component={Complainerinfo} />
                     </Switch>
                 </Router>
                </Bodypage>
