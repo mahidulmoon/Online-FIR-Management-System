@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'user',
     'thana',
     'fir',
+
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True

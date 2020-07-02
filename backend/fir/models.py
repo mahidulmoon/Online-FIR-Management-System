@@ -17,6 +17,6 @@ class FIR(models.Model):
     dateofincedence = models.CharField(max_length=30)
     timeofincedence = models.CharField(max_length=30)
     timeoffirregistration = models.DateTimeField(auto_now_add=True, blank=True)
-    complaintype = models.CharField(max_length=30)
+    complaintype = models.TextField()
     status=models.CharField(max_length=30,default='pending')
     thana = models.TextField()

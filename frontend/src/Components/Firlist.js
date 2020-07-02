@@ -15,6 +15,19 @@ class Firlist extends Component {
             this.setState({ islogin: 'false' });
         }
     }
+    approvebutton = (e,singlefir) =>{
+        singlefir.status = 'approved';
+        //console.log(singlefir);
+        axios.put(`http://127.0.0.1:8000/fir/firregister/${singlefir.id}/`,singlefir).then(res=>{
+            alert("Pengind for Creating ChargeSheet")
+            window.location.reload(false);
+        });
+    }
+    spambutton = (e,singlefir) =>{
+        singlefir.status = 'spam marked';
+        //console.log(singlefir);
+        axios.put(`http://127.0.0.1:8000/fir/firregister/${singlefir.id}/`,singlefir).then(res=>{alert("Spam Marked!!!");window.location.reload(false);});
+    }
     render() {
         if( this.state.islogin === 'false' ){
             return <Redirect to='/login' />
@@ -54,8 +67,8 @@ class Firlist extends Component {
                             <td>{singlefir.complaintype}</td>
                             <td>{singlefir.status}</td>
                             <td>{singlefir.thana}</td>
-                            <td><Button variant="primary">Approve</Button> <br/>
-                            <Button variant="danger"> Spam....</Button></td>
+                            <td><Button variant="primary" onClick={e => this.approvebutton(e,singlefir)}>Approve</Button> <br/>
+                            <Button variant="danger" onClick={e => this.spambutton(e,singlefir)}> Spam....</Button></td>
                             
                             </tr>
                         )

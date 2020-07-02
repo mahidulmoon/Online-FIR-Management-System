@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-import { ProgressBar,Container,Alert,Table } from 'react-bootstrap';
+import { ProgressBar,Container,Alert,Table,Button } from 'react-bootstrap';
 import Firlist from './Firlist';
-import { Redirect } from 'react-router-dom';
+import { Redirect,Link } from 'react-router-dom';
+import axios from 'axios';
 class Admindashboard extends Component {
     state = {
         islogin: '',
+        isadmin: '',
+        registeredfir:[],
     }
     componentDidMount(){
         if(localStorage.getItem('firtoken')){
             this.setState({ islogin: 'true' });
+            if(localStorage.getItem('admin')==='true'){
+                this.setState({isadmin: 'true'})
+                axios.get('http://127.0.0.1:8000/fir/firregister/').then(res=>this.setState({registeredfir:res.data}));
+            }else{
+                this.setState({isadmin: 'false'})
+            }
             //window.location.reload(false);
         }else{
             this.setState({ islogin: 'false' });
@@ -17,6 +26,8 @@ class Admindashboard extends Component {
     render() {
         if( this.state.islogin === 'false' ){
             return <Redirect to='/login' />
+        }else if(this.state.isadmin === 'false'){
+            return <Redirect  to='/firlist' />
         }
         return (
             <Container>
@@ -44,24 +55,29 @@ class Admindashboard extends Component {
                     <th>Date of Incidence</th>
                     <th>Date of Registration</th>
                     <th>Complaint</th>
-                    <th>Section</th>
+                    <th>Thana</th>
                     
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    
-                    
-                    </tr>
+                {this.state.registeredfir.map(singlefir=>{
+                        {if(singlefir.status==='ChargeSheet Registered'){
+                            return(
+                                <tr>
+                                <td>{singlefir.id}</td>
+                                <td><Link to={{ pathname:'/info', infoid:{ check: singlefir.id }}}>{singlefir.complainername}</Link></td>
+                                <td>{singlefir.victimename}</td>
+                                <td>{singlefir.age}</td>
+                                <td>{singlefir.address}</td>
+                                <td>{singlefir.dateofincedence}<br/>{singlefir.timeofincedence}</td>
+                                <td>{singlefir.timeoffirregistration.slice(0,10)}<br/>{singlefir.timeoffirregistration.slice(11,16)}</td>
+                                <td>{singlefir.complaintype}</td>
+                                <td>{singlefir.thana}</td>
+                                
+                                </tr>
+                            )
+                        }}
+                    })}
                     
                 </tbody>
             </Table></div>

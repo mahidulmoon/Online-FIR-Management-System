@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom';
 class Complainerinfo extends Component {
     state={
         info:[],
+        admin:''
     }
     componentDidMount(){
         axios.get(`http://127.0.0.1:8000/fir/complainerinfo/${this.props.location.infoid.check}/`).then(res=>this.setState({ info:res.data }))
+        this.setState({ admin: localStorage.getItem('admin') })
     }
     render() {
         return (
@@ -25,7 +27,8 @@ class Complainerinfo extends Component {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Link >Wired2v1</Link>
+                    {this.state.admin === 'true' && <Link to='/admindashboard' >Back</Link>}
+                    {this.state.admin === 'false' && <Link to='/firlist' >Back</Link>}
                 </Modal.Footer>
                 </Modal.Dialog>
             </div>
