@@ -28,7 +28,7 @@ class RegisterFIR extends Component {
         if(this.state.modalform.name === '' || this.state.modalform.fathername === '' || this.state.modalform.address === '' || this.state.modalform.contact === '' ){
             alert("Check your inputs");
         }else{
-            console.log(this.state.modalform);
+            //console.log(this.state.modalform);
             this.setState({ show: false });
         }
     }
@@ -45,7 +45,10 @@ class RegisterFIR extends Component {
         if(this.state.registerfir.complainername === '' || this.state.registerfir.victimename === '' || this.state.registerfir.age === '' || this.state.registerfir.address === '' || this.state.registerfir.dateofincedence === '' || this.state.registerfir.timeofincedence === '' || this.state.registerfir.complaintype === '' || this.state.registerfir.thana === '' ){
             alert("Please check your inputs");
         }else{
-            console.log(this.state.registerfir);
+            //console.log(this.state.registerfir);
+            axios.post('http://127.0.0.1:8000/fir/complainerinfo/',this.state.modalform).then(res=>{
+                axios.post('http://127.0.0.1:8000/fir/firregister/',this.state.registerfir).then(res=>{alert("Fir Registered");window.location.reload(false);}).catch(err=>alert("error in fir"));
+            }).catch(err=>alert("Error to register fir"));
         }
     }
     render() {

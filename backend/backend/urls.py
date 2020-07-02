@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/',include('user.urls')),
     path('thana/',include('thana.urls')),
+    path('fir/',include('fir.urls')),
 ]
