@@ -35,6 +35,7 @@ class Navigation extends Component {
                     {localStorage.getItem('admin') === 'false' && this.state.islogin && <Nav.Link href="/firlist">Pending FIR List</Nav.Link>}
                     {localStorage.getItem('admin') === 'false' && this.state.islogin && <Nav.Link href="/waitforcharge">Create ChargeSheet</Nav.Link>}
                     {localStorage.getItem('admin') === 'true' && this.state.islogin && <Nav.Link href="/register">Registration</Nav.Link> }   
+                    {localStorage.getItem('admin') === 'true' && <Nav.Link href="/admindashboard">Dashboard</Nav.Link> }   
                     <Nav.Link href="/contact">Contact</Nav.Link>                
                 </Nav>
                 <Navbar.Toggle />

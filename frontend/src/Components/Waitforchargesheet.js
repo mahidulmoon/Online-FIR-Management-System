@@ -36,12 +36,12 @@ class Waitforchargesheet extends Component {
                 <thead>
                     <tr>
                     <th>#</th>
-                    <th>Complainer Name</th>
+                    
                     <th>Victime Name</th>
                     <th>Age</th>
                     <th>Address</th>
                     <th>Date of Incidence</th>
-                    <th>Date of Registration</th>
+                    
                     <th>Complaint</th>
                     <th>Status</th>
                     <th>Thana</th>
@@ -54,13 +54,13 @@ class Waitforchargesheet extends Component {
                             return(
                                 <tr>
                                 <td>{singlefir.id}</td>
-                                <td><Link to={{ pathname:'/info', infoid:{ check: singlefir.id }}}>{singlefir.complainername}</Link></td>
+                                
                                 <td>{singlefir.victimename}</td>
                                 <td>{singlefir.age}</td>
                                 <td>{singlefir.address}</td>
-                                <td>{singlefir.dateofincedence}<br/>{singlefir.timeofincedence}</td>
+                                
                                 <td>{singlefir.timeoffirregistration.slice(0,10)}<br/>{singlefir.timeoffirregistration.slice(11,16)}</td>
-                                <td>{singlefir.complaintype}</td>
+                                <td><Link to={{ pathname:'/updatefir', passid:{checkid:singlefir.id}}}>{singlefir.complaintype}</Link></td>
                                 <td>{singlefir.status}</td>
                                 <td>{singlefir.thana}</td>
                                 <td><Button variant="success" onClick={e => this.approvebutton(e,singlefir)}>Mark as Done</Button></td>
