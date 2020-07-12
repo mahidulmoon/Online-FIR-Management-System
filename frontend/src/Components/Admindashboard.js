@@ -8,6 +8,7 @@ class Admindashboard extends Component {
         islogin: '',
         isadmin: '',
         registeredfir:[],
+        statistic:[],
     }
     componentDidMount(){
         if(localStorage.getItem('firtoken')){
@@ -15,6 +16,7 @@ class Admindashboard extends Component {
             if(localStorage.getItem('admin')==='true'){
                 this.setState({isadmin: 'true'})
                 axios.get('http://127.0.0.1:8000/fir/firregister/').then(res=>this.setState({registeredfir:res.data}));
+                axios.get('http://127.0.0.1:8000/fir/adminstatic/').then(res=>this.setState({statistic:res.data}))
             }else{
                 this.setState({isadmin: 'false'})
             }
@@ -34,13 +36,13 @@ class Admindashboard extends Component {
                 <br/>
                 <div className="admindashboarddatavis">
                     <Alert variant="info">Registered ChargeSheet
-                    <ProgressBar variant="success" now={40} label={`${40}%`} /></Alert>
-                    <Alert variant="info">Pending for ChargeSheet
-                    <ProgressBar variant="info" now={20} label={`${20}%`} /></Alert>
+                    <ProgressBar variant="success" now={this.state.statistic.chargesheet} label={`${this.state.statistic.chargesheet}%`} /></Alert>
+                    <Alert variant="info">Total Pending FIR
+                    <ProgressBar variant="info" now={this.state.statistic.pending} label={`${this.state.statistic.pending}%`} /></Alert>
                     <Alert variant="info">Approved FIR
-                    <ProgressBar variant="warning" now={60} label={`${60}%`}/></Alert>
-                    <Alert variant="info">Pending FIR
-                    <ProgressBar variant="danger" now={80} label={`${80}%`} /></Alert>
+                    <ProgressBar variant="warning" now={this.state.statistic.approve} label={`${this.state.statistic.approve}%`}/></Alert>
+                    <Alert variant="info">Spam FIR
+                    <ProgressBar variant="danger" now={this.state.statistic.spam} label={`${this.state.statistic.spam}%`} /></Alert>
                 </div>
                 <br/>
                 <h2>Registered ChargeSheet</h2>
