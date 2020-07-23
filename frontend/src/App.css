@@ -2,7 +2,10 @@
 	height: 500px;
 	overflow: scroll;
 }
-
+.loginpiclogo{
+	height: auto;
+	width: 200px;
+}
 footer{
 	position: relative;
 	bottom: 0;

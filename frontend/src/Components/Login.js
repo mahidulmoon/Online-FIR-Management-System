@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form,Container,Button } from 'react-bootstrap';
+import { Form,Container,Button,Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 class Login extends Component {
@@ -47,17 +47,24 @@ class Login extends Component {
         return (
             <Container>
                 <Form>
-                    <Form.Group controlId="formGroupEmail">
-                    <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" name="username" placeholder="Enter email" value={this.state.login.username} onChange={this.inputchange} />
+                    <Form.Row>
+                    <Form.Group>
+                        <Form.Label><img alt="policelogo" className="loginpiclogo" src="./kisspng-indonesian-national-police-promoter-police-officer-5b08c6618354b5.5194515315273017295379.png" /></Form.Label>
                     </Form.Group>
-                    <Form.Group controlId="formGroupPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" name="password" placeholder="Password" value={this.state.login.password} onChange={this.inputchange} />
+                    <Form.Group as={Col}>
+                        <Form.Group controlId="formGroupEmail">
+                        <Form.Label>Email address</Form.Label>
+                            <Form.Control type="email" name="username" placeholder="Enter email" value={this.state.login.username} onChange={this.inputchange} />
+                        </Form.Group>
+                        <Form.Group controlId="formGroupPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" name="password" placeholder="Password" value={this.state.login.password} onChange={this.inputchange} />
+                        </Form.Group>
+                        <Button variant="primary" type="submit" onClick={this.login} >
+                            Submit
+                        </Button>
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={this.login} >
-                        Submit
-                    </Button>
+                    </Form.Row>
                 </Form>
             </Container>
         );
