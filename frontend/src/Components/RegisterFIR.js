@@ -11,6 +11,7 @@ class RegisterFIR extends Component {
             complainername:'',victimename:'',age:'',address:'',dateofincedence:'',timeofincedence:'',complaintype:'',thana:''
         },
         thana:[],
+        popup: false,
     }
     componentDidMount(){
         axios.get('http://127.0.0.1:8000/thana/contact/').then(res=> this.setState({ thana: res.data }));
@@ -36,6 +37,12 @@ class RegisterFIR extends Component {
         const cred2 = this.state.registerfir;
         cred2[ e.target.name ] = e.target.value;
         this.setState({ registerfir: cred2 });
+        if(this.state.registerfir.complaintype === 'other'){
+            this.setState({popup:true});
+        }
+        // else{
+        //     this.setState({popup:false});
+        // }
     }
     firformsubmit = e =>{
         e.preventDefault();
@@ -134,6 +141,10 @@ class RegisterFIR extends Component {
                             <option value="Domestic Violence">Domestic Violence</option>
                             <option value="other">other</option>
                     </Form.Control>
+                    {this.state.popup && <Form.Group controlId="formGridAddress1">
+                        <Form.Label>Other:</Form.Label>
+                        <Form.Control placeholder="Type your complain" name="complaintype" onChange={this.firforminputchange} />
+                    </Form.Group>}
                     <Form.Control
                             as="select"
                             className="my-1 mr-sm-2"
