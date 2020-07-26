@@ -6,6 +6,22 @@
 	height: auto;
 	width: 200px;
 }
+.panelbox{
+	height: 100px;
+	width: 200px;
+	border: 1px solid black;
+	float: left;
+	margin: 15px;
+	padding: 5px;
+	box-shadow: 3px 3px 3px black;
+	background-color: #d1ecf1;
+}
+.adminpanellogo img{
+	height: auto;
+	width: 80px;
+	float: left;
+	margin-right: 5px;
+}
 footer{
 	position: relative;
 	bottom: 0;

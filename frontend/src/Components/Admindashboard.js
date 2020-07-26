@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ProgressBar,Container,Alert,Table } from 'react-bootstrap';
+import { ProgressBar,Container,Alert,Table,Form,Col } from 'react-bootstrap';
 import Firlist from './Firlist';
 import { Redirect,Link } from 'react-router-dom';
 import axios from 'axios';
@@ -34,16 +34,45 @@ class Admindashboard extends Component {
         return (
             <Container>
                 <br/>
-                <div className="admindashboarddatavis">
-                    <Alert variant="info">Registered ChargeSheet
-                    <ProgressBar variant="success" now={this.state.statistic.chargesheet} label={`${this.state.statistic.chargesheet}%`} /></Alert>
-                    <Alert variant="info">Total Pending FIR
-                    <ProgressBar variant="info" now={this.state.statistic.pending} label={`${this.state.statistic.pending}%`} /></Alert>
-                    <Alert variant="info">Approved FIR
-                    <ProgressBar variant="warning" now={this.state.statistic.approve} label={`${this.state.statistic.approve}%`}/></Alert>
-                    <Alert variant="info">Spam FIR
-                    <ProgressBar variant="danger" now={this.state.statistic.spam} label={`${this.state.statistic.spam}%`} /></Alert>
-                </div>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <div className="panelbox">
+                            <div className="">
+                                <i className="adminpanellogo"><img src="./sheriff.png" /></i>
+                                <h4>{this.state.statistic.totaluser}</h4>
+                                Registered User(s)
+                            </div>
+                        </div>
+                        <div className="panelbox">
+                            <div className="">
+                                <i className="adminpanellogo"><img src="./police.png" /></i>
+                                <h4>{this.state.statistic.highauth}</h4>
+                                Higher Authority
+                            </div>
+                        </div>
+                        <div className="panelbox">
+                            <div className="">
+                                <i className="adminpanellogo"><img src="./icons8-police-badge-50.png" /></i>
+                                <h4>{this.state.statistic.police}</h4>
+                                Verfied Police
+                            </div>
+                        </div>
+                        
+                        
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                        <div className="admindashboarddatavis">
+                            <Alert variant="info">Registered ChargeSheet
+                            <ProgressBar variant="success" now={this.state.statistic.chargesheet} label={`${this.state.statistic.chargesheet}%`} /></Alert>
+                            <Alert variant="info">Total Pending FIR
+                            <ProgressBar variant="info" now={this.state.statistic.pending} label={`${this.state.statistic.pending}%`} /></Alert>
+                            <Alert variant="info">Approved FIR
+                            <ProgressBar variant="warning" now={this.state.statistic.approve} label={`${this.state.statistic.approve}%`}/></Alert>
+                            <Alert variant="info">Spam FIR
+                            <ProgressBar variant="danger" now={this.state.statistic.spam} label={`${this.state.statistic.spam}%`} /></Alert>
+                        </div>
+                    </Form.Group>
+                </Form.Row>
                 <br/>
                 <h2>Registered ChargeSheet</h2>
                 <div className="admindashboardtable"><Table striped bordered hover variant="dark">
