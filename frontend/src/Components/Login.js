@@ -34,7 +34,7 @@ class Login extends Component {
                     this.setState({ isadmin: 'normaluser' });
                 }
             });
-        }).catch( err => alert("Pleace check your Input"))
+        }).catch( err => alert("Invalid Username and Password"))
         }
     }
     render() {

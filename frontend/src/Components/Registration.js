@@ -5,7 +5,7 @@ import axios from 'axios';
 class Registration extends Component {
     state = {
         register: {
-            username:'',password:'',email:'',first_name: '', last_name: ''
+            username:'',password:'',email:'',first_name: '', last_name: '',is_staff: false,
         },
         isadmin:'',
     }
@@ -13,6 +13,14 @@ class Registration extends Component {
         const cred = this.state.register;
         cred[ e.target.name ] = e.target.value;
         this.setState({ register: cred });
+    }
+    checkboxinput = e =>{
+        if(e.target.checked){
+            this.state.register.is_staff = true;
+        }else{
+            this.state.register.is_staff = false;
+        }
+        //this.setState({register:{is_staff: e.target.checked}});
     }
     componentDidMount(){
         if(localStorage.getItem('admin')==='true'){
@@ -72,7 +80,10 @@ class Registration extends Component {
                                 </Form.Group>
                             </Form.Row>
 
-                            
+                            <Form.Row>
+                                <Form.Check aria-label="is_staff" onClick={this.checkboxinput} value={this.state.register.is_staff} />
+                                <Form.Label>Staff User</Form.Label>
+                            </Form.Row>
 
                             <Button variant="primary" type="submit" onClick={this.onsubmit}>
                                 Submit
