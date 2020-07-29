@@ -1,0 +1,16 @@
+git init 
+git add .
+git commit -m "first commit"
+git remote add origin #link
+git push origin master(branch name)
+
+
+git add --all
+
+git checkout -b branchname
+git checkout branchname
+
+set REACT_NATIVE_PACKAGER_HOSTNAME=192.168.0.101
+
+
+https://stackblitz.com/edit/react-component-to-pdf-wwnzae?file=index.js

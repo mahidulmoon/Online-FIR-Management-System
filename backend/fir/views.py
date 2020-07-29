@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Complainerinfo,FIR
-from .serializer import ComplainerInfoSerializer,FIRSerializer
+from .models import Complainerinfo,FIR,Chargesheetfile
+from .serializer import ComplainerInfoSerializer,FIRSerializer,ChargeSheetSerializer
 from rest_framework.decorators import api_view 
 from django.contrib.auth.models import User
 from rest_framework.response import Response
+from django.http import HttpResponse
 # Create your views here.
 
 @api_view(['GET'])
@@ -48,3 +49,16 @@ class ComplainerViewSet(viewsets.ModelViewSet):
 class FirViewSet(viewsets.ModelViewSet):
     queryset = FIR.objects.all()
     serializer_class = FIRSerializer
+
+
+class ChargesheetfileViewSet(viewsets.ModelViewSet):
+    queryset = Chargesheetfile.objects.all()
+    serializer_class = ChargeSheetSerializer
+
+    def post(self,request,*args,**kwargs):
+        aid=request.date['approverid']
+        filefield1 = request.data['filefield']
+
+        Chargesheetfile.objects.create(approverid=aid,filefield=filefield1)
+
+        return HttpResponse({'message':'chargesheet created'},status=200)
