@@ -20,6 +20,7 @@ def admin_static(request):
         chargesheet = FIR.objects.filter(status='ChargeSheet Registered').count()
         totaluser = User.objects.all().count()
         alluser = User.objects.all()
+        chargesheetdoc = Chargesheetfile.objects.all().count()
         
         for user in alluser:
             if user.is_staff:
@@ -36,7 +37,7 @@ def admin_static(request):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method=='GET':
-        return Response({ 'totalfir':totalfir,'pending':pendingpercent,'spam':spampercent,'approve':approvepercent,'chargesheet':chargesheetpercent,'totaluser':totaluser,'highauth':highauth,'police':police })
+        return Response({ 'totalfir':totalfir,'pending':pendingpercent,'spam':spampercent,'approve':approvepercent,'chargesheet':chargesheetpercent,'totaluser':totaluser,'highauth':highauth,'police':police,'chargesheetdoc':chargesheetdoc })
         
     
 

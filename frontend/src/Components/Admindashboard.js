@@ -9,6 +9,8 @@ class Admindashboard extends Component {
         isadmin: '',
         registeredfir:[],
         statistic:[],
+        showdiv: false,
+        chargesheetdocfile:[],
     }
     componentDidMount(){
         if(localStorage.getItem('firtoken')){
@@ -16,7 +18,8 @@ class Admindashboard extends Component {
             if(localStorage.getItem('admin')==='true'){
                 this.setState({isadmin: 'true'})
                 axios.get('http://127.0.0.1:8000/fir/firregister/').then(res=>this.setState({registeredfir:res.data}));
-                axios.get('http://127.0.0.1:8000/fir/adminstatic/').then(res=>this.setState({statistic:res.data}))
+                axios.get('http://127.0.0.1:8000/fir/adminstatic/').then(res=>this.setState({statistic:res.data}));
+                axios.get('http://127.0.0.1:8000/fir/chargesheetfile/').then(res=>this.setState({chargesheetdocfile:res.data}));
             }else{
                 this.setState({isadmin: 'false'})
             }
@@ -57,6 +60,13 @@ class Admindashboard extends Component {
                                 Verfied Police
                             </div>
                         </div>
+                        <div className="panelbox" onClick={()=> this.setState({showdiv:!this.state.showdiv})}>
+                            <div className="">
+                                <i className="adminpanellogo"><img src="./pdf.png" /></i>
+                                <h4>{this.state.statistic.chargesheetdoc}</h4>
+                                ChargeSheet<br/>Documents
+                            </div>
+                        </div>
                         
                         
                     </Form.Group>
@@ -73,6 +83,30 @@ class Admindashboard extends Component {
                         </div>
                     </Form.Group>
                 </Form.Row>
+                <br/>
+                {this.state.showdiv && <div>
+                <h2>ChargeSheet Documents</h2>
+                    <div className="admindashboardtable" ><Table striped bordered hover>
+                        <thead>
+                            <tr>
+                            
+                            <th>Submitted UserId</th>
+                            <th>Document Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.chargesheetdocfile.map(singledoc=>{
+                                return(
+                                    <tr>
+                                    
+                                    <td>0110{singledoc.approverid}</td>
+                                    <td colSpan="2"><a href={singledoc.filefield} target="_blank">{singledoc.filefield}</a></td>
+                                    </tr>
+                                )
+                            })}
+                            
+                        </tbody>
+                        </Table></div></div>}
                 <br/>
                 <h2>Registered ChargeSheet</h2>
                 <div className="admindashboardtable"><Table striped bordered hover variant="dark">
@@ -114,7 +148,7 @@ class Admindashboard extends Component {
                 </tbody>
             </Table></div>
             <div>
-                <h2>Pending FIR</h2>
+                
                 <Firlist />
             </div>
             </Container>

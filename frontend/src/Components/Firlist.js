@@ -35,7 +35,7 @@ class Firlist extends Component {
         return (
             <Container>
                 <br/>
-                <h2>FIR list</h2>
+                <h2>Pending FIR list</h2>
                 <div className="admindashboardtable">
                 <Table striped bordered hover variant="dark">
                 <thead>
@@ -55,23 +55,25 @@ class Firlist extends Component {
                 </thead>
                 <tbody>
                     {this.state.registeredfir.map(singlefir=>{
-                        return(
-                            <tr>
-                            <td>{singlefir.id}</td>
-                            <td><Link to={{ pathname:'/info', infoid:{ check: singlefir.id }}}>{singlefir.complainername}</Link></td>
-                            <td>{singlefir.victimename}</td>
-                            <td>{singlefir.age}</td>
-                            <td>{singlefir.address}</td>
-                            <td>{singlefir.dateofincedence}<br/>{singlefir.timeofincedence}</td>
-                            <td>{singlefir.timeoffirregistration.slice(0,10)}<br/>{singlefir.timeoffirregistration.slice(11,16)}</td>
-                            <td>{singlefir.complaintype}</td>
-                            <td>{singlefir.status}</td>
-                            <td>{singlefir.thana}</td>
-                            <td><Button variant="primary" onClick={e => this.approvebutton(e,singlefir)}>Approve</Button> <br/>
-                            <Button variant="danger" onClick={e => this.spambutton(e,singlefir)}> Spam....</Button></td>
-                            
-                            </tr>
-                        )
+                        if(singlefir.status !== 'approved' && singlefir.status!== 'ChargeSheet Registered'){
+                            return(
+                                <tr>
+                                <td>{singlefir.id}</td>
+                                <td><Link to={{ pathname:'/info', infoid:{ check: singlefir.id }}}>{singlefir.complainername}</Link></td>
+                                <td>{singlefir.victimename}</td>
+                                <td>{singlefir.age}</td>
+                                <td>{singlefir.address}</td>
+                                <td>{singlefir.dateofincedence}<br/>{singlefir.timeofincedence}</td>
+                                <td>{singlefir.timeoffirregistration.slice(0,10)}<br/>{singlefir.timeoffirregistration.slice(11,16)}</td>
+                                <td>{singlefir.complaintype}</td>
+                                <td>{singlefir.status}</td>
+                                <td>{singlefir.thana}</td>
+                                <td><Button variant="primary" onClick={e => this.approvebutton(e,singlefir)}>Approve</Button> <br/>
+                                <Button variant="danger" onClick={e => this.spambutton(e,singlefir)}> Spam....</Button></td>
+                                
+                                </tr>
+                            )
+                        }
                     })}
                     
                 </tbody>

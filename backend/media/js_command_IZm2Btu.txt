@@ -1,0 +1,5 @@
+npm cache clean --force
+
+npm config set registry https://registry.npmjs.org/
+
+npm i -g create-react-app
