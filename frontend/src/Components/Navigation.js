@@ -41,7 +41,7 @@ class Navigation extends Component {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                    Signed in as: <a href="/">{this.state.username}</a>
+                    Signed in as: <a href="/profile">{this.state.username}</a>
                     </Navbar.Text>
                     {this.state.islogin === false && <Nav.Link href="/login">LogIN</Nav.Link>}
                     {this.state.islogin && <Nav.Link onClick={e =>this.logout(e)}>LogOut</Nav.Link>} 

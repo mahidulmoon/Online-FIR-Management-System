@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .serializers import UserSerializer,GetUserInfo
+from .serializers import UserSerializer,GetUserInfo,UserProfileSerializer
 from django.contrib.auth.models import User
+from .models import UserProfile
 from rest_framework import viewsets
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -23,3 +24,10 @@ class CustomObtainAuthToken(ObtainAuthToken):
 class GetUserinfoView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = GetUserInfo
+
+
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer

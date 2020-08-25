@@ -10,10 +10,12 @@ class Waitforchargesheet extends Component {
         chargesheetfileupload:{
             approverid:localStorage.getItem('firuserid'),filefield:null
         },
-        finalsinglefir:[]
+        finalsinglefir:[],
+        havefile: false
     }
     handleClose = (event) =>{
         this.setState({ show: false });
+        window.location.reload(false);
     }
     componentDidMount(){
         if(localStorage.getItem('firtoken')){
@@ -31,6 +33,7 @@ class Waitforchargesheet extends Component {
     }
     fileuploadchange=e=>{
         this.state.chargesheetfileupload.filefield = e.target.files[0];
+        this.setState({havefile:true});
     }
     onfilesubmit=(e)=>{
         e.preventDefault();
@@ -57,7 +60,7 @@ class Waitforchargesheet extends Component {
                 <br/>
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                    <Modal.Title>Complainer Details</Modal.Title>
+                    <Modal.Title>Submit File</Modal.Title>
                     </Modal.Header>
                     <Modal.Body><Form>
                     <Form.Group>
@@ -67,9 +70,9 @@ class Waitforchargesheet extends Component {
                         
                         
                         
-                        <Button variant="primary" type="submit" onClick={this.onfilesubmit} >
+                        {this.state.havefile && <Button variant="primary" type="submit" onClick={this.onfilesubmit} >
                             Upload
-                        </Button>
+                        </Button>}
                     </Form></Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={this.handleClose}>

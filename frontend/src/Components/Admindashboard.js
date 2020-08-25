@@ -115,7 +115,7 @@ class Admindashboard extends Component {
                     <th>#</th>
                     <th>Complainer Name</th>
                     <th>Victime Name</th>
-                    <th>ChargeSheet Register's Name</th>
+                    <th>Age</th>
                     <th>Address</th>
                     <th>Date of Incidence</th>
                     <th>Date of Registration</th>
