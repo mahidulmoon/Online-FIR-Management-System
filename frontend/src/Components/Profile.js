@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Container,Button,Col,Form} from 'react-bootstrap';
+import {Container,Button,Col,Form,Row} from 'react-bootstrap';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 export default class Profile extends Component {
@@ -8,7 +8,11 @@ export default class Profile extends Component {
         user:[],
         islogin: '',
         edit: false,
-        filefield: null
+        filefield: null,
+        showpass: false,
+        changepass:{
+            id:localStorage.getItem('firuserid'),email:'',password:''
+        }
     }
     componentDidMount(){
         if(localStorage.getItem('firuserid')){
@@ -27,6 +31,22 @@ export default class Profile extends Component {
         this.setState({profile: cred});
         //console.log(this.state.profile);
     }
+
+    passinputchange= e =>{
+        e.preventDefault();
+        const cred = this.state.changepass;
+        cred[ e.target.name ] = e.target.value;
+        this.setState({changepass:cred});
+        //console.log(this.state.changepass);
+    }
+    submitpass = e =>{
+        if(this.state.changepass.email === '' || this.state.changepass.password ===''){
+            alert("please fillup the fields");
+        }else{
+            axios.post('http://127.0.0.1:8000/register/changepass/',this.state.changepass).then(res=>{alert(res.data.message);if(res.data.message==='password changed'){window.location.reload(false);}}).catch(err => console.log('error passing data'))
+        }
+    }
+
     savebutton=(e)=>{
         alert("SuccessFully Updated");
         //axios.put(`http://127.0.0.1:8000/register/userprofile/${parseInt(localStorage.getItem('firuserid'))}/`,this.state.profile).then(res => alert("Profile Updated")).catch(error => console.log('error'));
@@ -84,13 +104,30 @@ export default class Profile extends Component {
                                 </div>
                                 </div>
                             </div>
+                            {this.state.showpass && <div>
+                            <Form>
+                                <h3>Change Password</h3>
+                                <Row>
+                                    <Col>
+                                    <Form.Control value={this.state.changepass.email} name='email' onChange={this.passinputchange} placeholder="Email" />
+                                    </Col>
+                                    <Col>
+                                    <Form.Control value={this.state.changepass.password} name='password' onChange={this.passinputchange} placeholder="New Password" />
+                                    </Col>
+                                </Row>
+                                <br/>
+                                <Button onClick={this.submitpass} variant="success">Change</Button> &nbsp;
+                                <Button onClick={()=>this.setState({showpass: !this.state.showpass})} variant="primary">Cancel</Button>
+                                </Form>
+                                <br/>
+                            </div>}
                         
                             <div class="social_media">
                                 <ul>
                                 <Form.Row>
                                 <li><Button as={Col} onClick={()=>this.setState({edit: !this.state.edit})} variant="primary">Update</Button></li> &nbsp;
                                 {this.state.edit &&<li><Button as={Col} onClick={this.savebutton} variant="success">Save</Button></li>} &nbsp;
-                                <li><Button as={Col} variant="danger">Change Password</Button></li> &nbsp;
+                                <li><Button as={Col} onClick={()=> this.setState({showpass: !this.state.showpass})} variant="danger">Change Password</Button></li> &nbsp;
                                 </Form.Row>
                             </ul>
                         </div>
