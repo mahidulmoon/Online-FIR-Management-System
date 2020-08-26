@@ -13,6 +13,7 @@ import Waitforchargsheet from './Waitforchargesheet';
 import Contactforhelp from './Contactforhelp';
 import Complainerinfo from './Complainerinfo';
 import Profile from './Profile';
+import SearchResult from './SearchResult';
 import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
 export default class Index extends Component {
     render() {
@@ -36,6 +37,7 @@ export default class Index extends Component {
                         <Route path='/waitforcharge' exact component={Waitforchargsheet} />
                         <Route path='/info' exact component={Complainerinfo} />
                         <Route path='/profile' exact component={Profile} />
+                        <Route path='/search' exact component={SearchResult} />
                     </Switch>
                 </Router>
                </Bodypage>

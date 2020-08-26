@@ -38,7 +38,26 @@ def admin_static(request):
 
     if request.method=='GET':
         return Response({ 'totalfir':totalfir,'pending':pendingpercent,'spam':spampercent,'approve':approvepercent,'chargesheet':chargesheetpercent,'totaluser':totaluser,'highauth':highauth,'police':police,'chargesheetdoc':chargesheetdoc })
-        
+
+
+@api_view(['POST'])
+def search_fir(request):
+
+    if request.method == 'POST':
+        searchname=request.data['victimename']
+        try:
+            result = FIR.objects.get(victimename=searchname)
+            serializer = FIRSerializer(result)
+
+            if result is not None:
+                return Response(serializer.data)
+            else:
+                return Response({'message': 'No result found'})
+
+
+
+        except:
+            return Response({'message':'No result found'})    
     
 
 

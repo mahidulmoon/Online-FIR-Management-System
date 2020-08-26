@@ -53,7 +53,7 @@ class Login extends Component {
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Group controlId="formGroupEmail">
-                        <Form.Label>Email address</Form.Label>
+                        <Form.Label>Username</Form.Label>
                             <Form.Control type="email" name="username" placeholder="Enter email" value={this.state.login.username} onChange={this.inputchange} />
                         </Form.Group>
                         <Form.Group controlId="formGroupPassword">
